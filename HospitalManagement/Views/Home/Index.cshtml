@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Doctor
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="form-group">
+                <a class="btn btn-outline-secondary" asp-controller="Doctors" asp-action="Create">Create New</a>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Role</th>
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <th>User</th>
+                            }
+                            else if (User.IsInRole("Admin"))
+                            {
+                                <th>Admin</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>@Model.FName</td>
+                            <td>@Model.Position</td>
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    <a class="alert-primary" href="/Appointment/Create/@Model.Id">Book Appointment</a>
+                                </td>
+                            }
+                            else if (User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    <a class="alert-primary" href="/Doctors/Edit/@Model.Id">Edit</a>
+                                    <a class="alert-danger" href="/Doctors/Delete/@Model.Id">Delete</a>
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
