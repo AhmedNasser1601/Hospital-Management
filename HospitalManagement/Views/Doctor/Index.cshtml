@@ -1,0 +1,57 @@
+@using HospitalManagement.Data
+@model List<Doctor>
+
+<h2>Doctor</h2>
+<div class="row">
+    <div class="col-md-8 offset-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="form-group">
+                <a class="btn btn-outline-secondary" asp-controller="Doctors" asp-action="Create">Add Doctor</a>
+            </div>
+        }
+        else
+        {
+
+            <div class="form-group">
+                <a class="btn btn-outline-secondary" asp-controller="Appointment" asp-action="Appointments">Appointments</a>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Position</th>
+                            <th>Experience</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Model in Model)
+                        {
+                            <tr>
+                                <td>@Model.FName</td>
+                                <td>@Model.LName</td>
+                                <td>@Model.Age</td>
+                                <td>@Model.Position</td>
+                                <td>@Model.Experience il</td>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <td>
+                                        <a class="alert-primary" href="/Appointment/Create/@Model.Id">Book Appointment</a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
