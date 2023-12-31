@@ -1,0 +1,59 @@
+@model Appointment
+
+<h2>Create Appointment</h2>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group">
+                    <a class="btn btn-outline-secondary" asp-controller="Appointment" asp-action="Appointments">Appointments</a>
+                </div>
+                <p class="alert-primary">Doctor, @ViewData["DoctorInfo"] Number of Patients: @ViewData["patientCount"]</p>
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="PatientFName" class="control-label">First Name</label>
+                        <input asp-for="PatientFName" type="text" class="form-control" />
+                        <span asp-validation-for="PatientFName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PatientLName" class="control-label">Last Name</label>
+                        <input asp-for="PatientLName" type="text" class="form-control" />
+                        <span asp-validation-for="PatientLName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label">Age</label>
+                        <input asp-for="Age" type="text" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone" class="control-label">Phone</label>
+                        <input asp-for="Phone" type="text" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Disease" class="control-label">Disease</label>
+                        <input asp-for="Disease" type="text" class="form-control" />
+                        <span asp-validation-for="Disease" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateAndTime" class="control-label">Date & Time</label>
+                        <input asp-for="DateAndTime" type="date" class="form-control" />
+                        <span asp-validation-for="DateAndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DoctorId" class="control-label">Doctor</label>
+                        @Html.DropDownListFor(x => x.DoctorId, (List<SelectListItem>)ViewData["Doctor"], "Select", new { @class = "form-control" })<br />
+                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-outline-success float-right" type="submit" value="Create" />
+                        <a class="btn btn-outline-secondary" asp-controller="Appointment" asp-action="Index">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
